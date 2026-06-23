@@ -19,46 +19,73 @@
       text-align: center; font-size: 17px; font-weight: 500;
       color: #555; margin-bottom: 20px; letter-spacing: 0.02em;
     }
-    #nickname-screen {
-      background: #fff; border-radius: 16px; border: 0.5px solid #e0e0e0;
-      padding: 2rem 1.5rem; display: flex; flex-direction: column;
-      align-items: center; gap: 14px;
+    #name-screen {
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
     }
-    #nickname-screen h2 { font-size: 18px; font-weight: 500; }
-    #nickname-screen p { font-size: 14px; color: #888; text-align: center; line-height: 1.6; }
-    #nickname-input {
-      width: 100%; max-width: 280px; font-size: 16px; padding: 10px 14px;
-      border-radius: 8px; border: 0.5px solid #ccc;
+    #name-screen h2 { font-size: 18px; font-weight: 500; }
+    .screen-desc { font-size: 13px; color: #888; text-align: center; line-height: 1.6; }
+    .screen-subdesc { font-size: 12px; color: #aaa; text-align: center; line-height: 1.5; }
+    .name-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%;
+    }
+    .name-btn {
+      padding: 10px 4px; font-size: 14px; font-weight: 500;
+      border-radius: 8px; border: 0.5px solid #ddd;
       background: #fff; color: #1a1a1a;
+      cursor: pointer; transition: background 0.15s; text-align: center;
     }
-    #nickname-input:focus { outline: none; border-color: #999; }
-    #nickname-submit {
-      width: 100%; max-width: 280px; padding: 10px;
+    .name-btn:hover { background: #f5f5f5; }
+    .name-btn.selected { background: #eaf3fc; border-color: #a0c4f0; color: #1a6fc4; }
+    .divider {
+      width: 100%; display: flex; align-items: center; gap: 10px;
+    }
+    .divider-line { flex: 1; height: 0.5px; background: #e0e0e0; }
+    .divider-text { font-size: 12px; color: #bbb; white-space: nowrap; }
+    .register-box {
+      width: 100%; border: 0.5px solid #e0e0e0;
+      border-radius: 12px; padding: 14px; background: #fafafa;
+    }
+    .register-box p { font-size: 12px; color: #888; line-height: 1.6; margin-bottom: 10px; }
+    .register-box p strong { color: #333; }
+    .register-row { display: flex; gap: 8px; }
+    .register-input {
+      flex: 1; font-size: 14px; padding: 8px 10px;
+      border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a;
+    }
+    .register-input:focus { outline: none; border-color: #999; }
+    .btn-register {
+      font-size: 13px; padding: 8px 14px; border-radius: 8px;
+      border: 0.5px solid #ddd; background: #fff; color: #1a1a1a;
+      cursor: pointer; transition: background 0.15s; white-space: nowrap;
+    }
+    .btn-register:hover { background: #f5f5f5; }
+    .register-error { font-size: 12px; color: #c0392b; margin-top: 6px; display: none; }
+    .confirm-btn {
+      width: 100%; max-width: 320px; padding: 11px;
       font-size: 15px; font-weight: 500;
-      background: #fff; border: 0.5px solid #ccc;
+      background: #fff; border: 0.5px solid #ddd;
       border-radius: 8px; color: #1a1a1a;
-      cursor: pointer; transition: background 0.15s;
+      cursor: pointer; transition: background 0.15s; opacity: 0.4; pointer-events: none;
     }
-    #nickname-submit:hover { background: #f5f5f5; }
+    .confirm-btn.active { opacity: 1; pointer-events: auto; }
+    .confirm-btn.active:hover { background: #f5f5f5; }
     #main-screen { display: none; }
     .user-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 14px;
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
     }
     .user-name { font-size: 15px; font-weight: 500; }
-    .btn-edit-name {
+    .btn-change-name {
       font-size: 13px; color: #888; background: none; border: none;
       cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
     }
-    .btn-edit-name:hover { color: #333; }
+    .btn-change-name:hover { color: #333; }
     .prayer-list-section {
       background: #fff; border-radius: 16px; border: 0.5px solid #e0e0e0;
       overflow: hidden; margin-bottom: 12px;
     }
     .prayer-list-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 13px 16px; background: #fafafa;
-      cursor: pointer; user-select: none;
+      padding: 13px 16px; background: #fafafa; cursor: pointer; user-select: none;
     }
     .prayer-list-header-left { display: flex; align-items: center; gap: 8px; }
     .prayer-list-title { font-size: 14px; font-weight: 500; }
@@ -71,23 +98,19 @@
       white-space: pre-wrap; word-break: break-all;
       max-height: 260px; overflow-y: auto; margin-bottom: 10px; display: none;
     }
-    .prayer-empty {
-      font-size: 13px; color: #aaa; text-align: center;
-      padding: 14px 0; margin-bottom: 10px;
-    }
+    .prayer-empty { font-size: 13px; color: #aaa; text-align: center; padding: 14px 0; margin-bottom: 10px; }
     .prayer-edit-area { display: none; }
     .prayer-edit-area.open { display: block; }
     .prayer-textarea {
       width: 100%; min-height: 160px; font-size: 13px; line-height: 1.7;
-      padding: 10px 12px; border-radius: 8px; border: 0.5px solid #ccc;
-      background: #fff; color: #1a1a1a; resize: vertical;
-      font-family: inherit; margin-bottom: 8px;
+      padding: 10px 12px; border-radius: 8px; border: 0.5px solid #ddd;
+      background: #fff; color: #1a1a1a; resize: vertical; font-family: inherit; margin-bottom: 8px;
     }
     .prayer-textarea:focus { outline: none; border-color: #999; }
     .edit-btns { display: flex; gap: 8px; }
     .btn-edit-list, .btn-save-list, .btn-cancel-list {
       font-size: 13px; padding: 6px 14px; border-radius: 8px;
-      border: 0.5px solid #ccc; background: #fff; color: #1a1a1a;
+      border: 0.5px solid #ddd; background: #fff; color: #1a1a1a;
       cursor: pointer; transition: background 0.15s;
     }
     .btn-edit-list:hover, .btn-cancel-list:hover { background: #f5f5f5; }
@@ -109,7 +132,7 @@
     .controls { display: flex; gap: 10px; margin: 18px 0 0; }
     .btn-start, .btn-stop {
       flex: 1; padding: 13px; font-size: 15px; font-weight: 500;
-      border-radius: 12px; border: 0.5px solid #ccc;
+      border-radius: 12px; border: 0.5px solid #ddd;
       cursor: pointer; transition: background 0.15s, opacity 0.15s;
       background: #fff; color: #1a1a1a;
       display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -125,17 +148,15 @@
     }
     .btn-reset-toggle:hover { color: #999; }
     .reset-box {
-      display: none; margin-top: 10px;
-      border: 0.5px solid #e0e0e0; border-radius: 8px;
-      padding: 12px 14px; background: #fafafa; text-align: left;
+      display: none; margin-top: 10px; border: 0.5px solid #e0e0e0;
+      border-radius: 8px; padding: 12px 14px; background: #fafafa; text-align: left;
     }
     .reset-box.open { display: block; }
     .reset-box p { font-size: 13px; color: #888; margin-bottom: 8px; }
     .reset-row { display: flex; gap: 8px; }
     .reset-pw-input {
       flex: 1; font-size: 14px; padding: 7px 10px;
-      border-radius: 8px; border: 0.5px solid #ccc;
-      background: #fff; color: #1a1a1a;
+      border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a;
     }
     .reset-pw-input:focus { outline: none; border-color: #999; }
     .btn-reset-confirm {
@@ -145,32 +166,52 @@
     }
     .btn-reset-confirm:hover { background: #fdf0f0; }
     .reset-error { font-size: 12px; color: #c0392b; margin-top: 6px; display: none; }
+    .loading-text { font-size: 13px; color: #bbb; text-align: center; padding: 16px 0; grid-column: span 4; }
   </style>
 </head>
 <body>
   <div class="container">
     <p class="app-title">🙏 사랑부 기도 스톱워치</p>
 
-    <div id="nickname-screen">
-      <h2>처음 오셨군요!</h2>
-      <p>사용할 닉네임을 입력해주세요.<br>한 번 저장되면 다음엔 자동으로 불러와요.</p>
-      <input id="nickname-input" type="text" placeholder="닉네임 입력" maxlength="20" />
-      <button id="nickname-submit">시작하기</button>
+    <div id="name-screen">
+      <h2>본인 이름을 선택해주세요</h2>
+      <p class="screen-subdesc">이름은 개인 누적 기도시간 집계용으로만 사용돼요.</p>
+      <div class="name-grid" id="name-grid">
+        <div class="loading-text">목록 불러오는 중...</div>
+      </div>
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">목록에 없으면 등록</span>
+        <div class="divider-line"></div>
+      </div>
+      <div class="register-box">
+        <p>
+          <strong>이름 등록 안내</strong><br>
+          이름은 개인 누적 기도시간 집계용으로만 사용돼요.<br>
+          한 번 등록한 이름은 변경할 수 없으니 신중하게 입력해주세요.
+        </p>
+        <div class="register-row">
+          <input class="register-input" id="register-input" type="text" placeholder="등록할 이름 입력" maxlength="10" />
+          <button class="btn-register" id="btn-register">등록</button>
+        </div>
+        <div class="register-error" id="register-error"></div>
+      </div>
+      <button class="confirm-btn" id="confirm-btn" disabled>시작하기</button>
     </div>
 
     <div id="main-screen">
       <div class="user-bar">
         <span class="user-name" id="display-name"></span>
-        <button class="btn-edit-name" id="btn-edit-name">닉네임 변경</button>
+        <button class="btn-change-name" id="btn-change-name">이름 변경</button>
       </div>
 
       <div class="prayer-list-section">
         <div class="prayer-list-header" id="prayer-list-toggle">
           <div class="prayer-list-header-left">
-            <i class="ti ti-list" aria-hidden="true" style="font-size:16px; color:#999;"></i>
+            <i class="ti ti-list" style="font-size:16px; color:#999;"></i>
             <span class="prayer-list-title">기도리스트</span>
           </div>
-          <i class="ti ti-chevron-down prayer-chevron" id="prayer-chevron" aria-hidden="true"></i>
+          <i class="ti ti-chevron-down prayer-chevron" id="prayer-chevron"></i>
         </div>
         <div class="prayer-list-body" id="prayer-list-body">
           <div class="prayer-content-display" id="prayer-display"></div>
@@ -184,33 +225,25 @@
           </div>
           <div id="view-btns">
             <button class="btn-edit-list" id="btn-edit-list">
-              <i class="ti ti-edit" aria-hidden="true"></i> 수정
+              <i class="ti ti-edit"></i> 수정
             </button>
           </div>
         </div>
       </div>
 
       <p class="section-label">전체 기도시간</p>
-      <div class="time-card">
-        <div class="time-value" id="total-time">00:00:00</div>
-      </div>
-
+      <div class="time-card"><div class="time-value" id="total-time">00:00:00</div></div>
       <p class="section-label">나의 누적 기도시간</p>
-      <div class="time-card">
-        <div class="time-value" id="my-accumulated">00:00:00</div>
-      </div>
-
+      <div class="time-card"><div class="time-value" id="my-accumulated">00:00:00</div></div>
       <p class="section-label">나의 현재 기도시간</p>
-      <div class="time-card highlight">
-        <div class="time-value" id="my-current">00:00:00</div>
-      </div>
+      <div class="time-card highlight"><div class="time-value" id="my-current">00:00:00</div></div>
 
       <div class="controls">
         <button class="btn-start" id="btn-start">
-          <i class="ti ti-player-play" aria-hidden="true"></i> 기도 시작
+          <i class="ti ti-player-play"></i> 기도 시작
         </button>
         <button class="btn-stop" id="btn-stop" disabled>
-          <i class="ti ti-player-stop" aria-hidden="true"></i> 기도 종료
+          <i class="ti ti-player-stop"></i> 기도 종료
         </button>
       </div>
 
@@ -231,6 +264,9 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
   <script>
+    const DEFAULT_MEMBERS = ['건하','광식','규리','규택','금','근원','나희','단','덕휴','동균','로사','매영','민기','민석','민지','미희','봄이','성규','성은','성휴','소정','소피','승귀','슬기','승희','석영','아연','언용','웅','은아','인국','인규','인후','재희','정민','정인','종원','주영','지수','지원','지훈','진','진아','진우','쥬스틴','셀레스트','태우','하경','한나','혜민','혜인','혜지','효민','희선','희연','희원','유진'];
+    const RESET_PW = '0728';
+
     const firebaseConfig = {
       apiKey: "AIzaSyDNVdBzA0J64fITZxhdaVSQ9__sbljmkew",
       authDomain: "sarangbu-prayer.firebaseapp.com",
@@ -243,13 +279,14 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    const RESET_PW = '0728';
     let nickname = localStorage.getItem('sarangbu_nickname') || '';
     let sessionInterval = null;
     let myAccumulated = 0;
     let myCurrentSec = 0;
     let sessionStartTime = null;
     let isRunning = false;
+    let selectedName = '';
+    let allMembers = [];
 
     function fmt(sec) {
       const h = Math.floor(sec / 3600);
@@ -258,8 +295,71 @@
       return [h, m, s].map(v => String(v).padStart(2, '0')).join(':');
     }
 
+    function sortKorean(arr) {
+      return [...arr].sort((a, b) => a.localeCompare(b, 'ko'));
+    }
+
+    function renderGrid(members) {
+      const grid = document.getElementById('name-grid');
+      grid.innerHTML = '';
+      sortKorean(members).forEach(name => {
+        const btn = document.createElement('button');
+        btn.className = 'name-btn';
+        btn.textContent = name;
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.name-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          selectedName = name;
+          const confirmBtn = document.getElementById('confirm-btn');
+          confirmBtn.disabled = false;
+          confirmBtn.classList.add('active');
+        });
+        grid.appendChild(btn);
+      });
+    }
+
+    function loadMembers() {
+      db.ref('members').once('value').then(snap => {
+        const extra = snap.val() ? Object.keys(snap.val()) : [];
+        allMembers = sortKorean([...new Set([...DEFAULT_MEMBERS, ...extra])]);
+        renderGrid(allMembers);
+      });
+    }
+
+    document.getElementById('btn-register').addEventListener('click', registerName);
+    document.getElementById('register-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') registerName();
+    });
+
+    function registerName() {
+      const val = document.getElementById('register-input').value.trim();
+      const errEl = document.getElementById('register-error');
+      errEl.style.display = 'none';
+      if (!val) { errEl.textContent = '이름을 입력해주세요.'; errEl.style.display = 'block'; return; }
+      if (allMembers.includes(val)) { errEl.textContent = '이미 목록에 있는 이름이에요. 위에서 선택해주세요.'; errEl.style.display = 'block'; return; }
+      const confirmed = confirm('"' + val + '"(으)로 등록할까요?\n\n이름은 개인 누적 기도시간 집계용으로만 사용되며,\n한 번 등록한 이름은 변경할 수 없어요.');
+      if (!confirmed) return;
+      db.ref('members/' + val).set(true).then(() => {
+        allMembers = sortKorean([...allMembers, val]);
+        renderGrid(allMembers);
+        document.getElementById('register-input').value = '';
+        setTimeout(() => {
+          document.querySelectorAll('.name-btn').forEach(btn => {
+            if (btn.textContent === val) { btn.click(); btn.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+          });
+        }, 50);
+      });
+    }
+
+    document.getElementById('confirm-btn').addEventListener('click', () => {
+      if (!selectedName) return;
+      nickname = selectedName;
+      localStorage.setItem('sarangbu_nickname', nickname);
+      showMain();
+    });
+
     function showMain() {
-      document.getElementById('nickname-screen').style.display = 'none';
+      document.getElementById('name-screen').style.display = 'none';
       document.getElementById('main-screen').style.display = 'block';
       document.getElementById('display-name').textContent = nickname;
       loadMyAccumulated();
@@ -286,14 +386,8 @@
         const display = document.getElementById('prayer-display');
         const empty = document.getElementById('prayer-empty');
         document.getElementById('prayer-textarea').value = text;
-        if (text) {
-          display.textContent = text;
-          display.style.display = 'block';
-          empty.style.display = 'none';
-        } else {
-          display.style.display = 'none';
-          empty.style.display = 'block';
-        }
+        if (text) { display.textContent = text; display.style.display = 'block'; empty.style.display = 'none'; }
+        else { display.style.display = 'none'; empty.style.display = 'block'; }
       });
     }
 
@@ -301,7 +395,6 @@
       document.getElementById('prayer-list-body').classList.toggle('open');
       document.getElementById('prayer-chevron').classList.toggle('open');
     });
-
     document.getElementById('btn-edit-list').addEventListener('click', () => {
       document.getElementById('prayer-edit-area').classList.add('open');
       document.getElementById('view-btns').style.display = 'none';
@@ -309,14 +402,10 @@
       document.getElementById('prayer-empty').style.display = 'none';
       document.getElementById('prayer-textarea').focus();
     });
-
     document.getElementById('btn-save-list').addEventListener('click', () => {
-      const text = document.getElementById('prayer-textarea').value.trim();
-      db.ref('prayerList').set(text).then(() => closeEdit());
+      db.ref('prayerList').set(document.getElementById('prayer-textarea').value.trim()).then(() => closeEdit());
     });
-
     document.getElementById('btn-cancel-list').addEventListener('click', closeEdit);
-
     function closeEdit() {
       document.getElementById('prayer-edit-area').classList.remove('open');
       document.getElementById('view-btns').style.display = 'block';
@@ -324,9 +413,7 @@
 
     function startPrayer() {
       if (isRunning) return;
-      isRunning = true;
-      myCurrentSec = 0;
-      sessionStartTime = Date.now();
+      isRunning = true; myCurrentSec = 0; sessionStartTime = Date.now();
       document.getElementById('btn-start').disabled = true;
       document.getElementById('btn-stop').disabled = false;
       sessionInterval = setInterval(() => {
@@ -338,17 +425,14 @@
 
     function stopPrayer() {
       if (!isRunning) return;
-      isRunning = false;
-      clearInterval(sessionInterval);
-      sessionInterval = null;
+      isRunning = false; clearInterval(sessionInterval); sessionInterval = null;
       document.getElementById('btn-start').disabled = false;
       document.getElementById('btn-stop').disabled = true;
       const elapsed = myCurrentSec;
       db.ref('users/' + nickname + '/accumulated').transaction(cur => (cur || 0) + elapsed);
       db.ref('total').transaction(cur => (cur || 0) + elapsed);
       db.ref('sessions/' + nickname).remove();
-      myAccumulated += elapsed;
-      myCurrentSec = 0;
+      myAccumulated += elapsed; myCurrentSec = 0;
       document.getElementById('my-accumulated').textContent = fmt(myAccumulated);
       document.getElementById('my-current').textContent = fmt(0);
     }
@@ -356,31 +440,17 @@
     document.getElementById('btn-start').addEventListener('click', startPrayer);
     document.getElementById('btn-stop').addEventListener('click', stopPrayer);
 
-    document.getElementById('btn-edit-name').addEventListener('click', () => {
-      const confirmed = confirm('닉네임을 변경하면 나의 누적 기도시간이 초기화됩니다.\n정말 변경하시겠어요?');
-      if (!confirmed) return;
+    document.getElementById('btn-change-name').addEventListener('click', () => {
       if (isRunning) stopPrayer();
       localStorage.removeItem('sarangbu_nickname');
-      nickname = '';
-      myAccumulated = 0;
-      myCurrentSec = 0;
+      nickname = ''; selectedName = ''; myAccumulated = 0; myCurrentSec = 0;
       document.getElementById('my-accumulated').textContent = fmt(0);
       document.getElementById('my-current').textContent = fmt(0);
       document.getElementById('main-screen').style.display = 'none';
-      document.getElementById('nickname-screen').style.display = 'flex';
-      document.getElementById('nickname-input').value = '';
-    });
-
-    document.getElementById('nickname-submit').addEventListener('click', () => {
-      const val = document.getElementById('nickname-input').value.trim();
-      if (!val) return;
-      nickname = val;
-      localStorage.setItem('sarangbu_nickname', nickname);
-      showMain();
-    });
-
-    document.getElementById('nickname-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') document.getElementById('nickname-submit').click();
+      document.getElementById('name-screen').style.display = 'flex';
+      document.querySelectorAll('.name-btn').forEach(b => b.classList.remove('selected'));
+      const confirmBtn = document.getElementById('confirm-btn');
+      confirmBtn.disabled = true; confirmBtn.classList.remove('active');
     });
 
     document.getElementById('btn-reset-toggle').addEventListener('click', () => {
@@ -388,22 +458,16 @@
       document.getElementById('reset-pw-input').value = '';
       document.getElementById('reset-error').style.display = 'none';
     });
-
     document.getElementById('btn-reset-confirm').addEventListener('click', () => {
       const pw = document.getElementById('reset-pw-input').value.trim();
       if (pw !== RESET_PW) {
         document.getElementById('reset-error').style.display = 'block';
-        document.getElementById('reset-pw-input').value = '';
-        return;
+        document.getElementById('reset-pw-input').value = ''; return;
       }
-      const confirmed = confirm('전체 기도시간과 모든 누적시간이 초기화됩니다.\n정말 진행할까요?');
-      if (!confirmed) return;
+      if (!confirm('전체 기도시간과 모든 누적시간이 초기화됩니다.\n정말 진행할까요?')) return;
       if (isRunning) stopPrayer();
-      db.ref('total').set(0);
-      db.ref('users').remove();
-      db.ref('sessions').remove();
-      myAccumulated = 0;
-      myCurrentSec = 0;
+      db.ref('total').set(0); db.ref('users').remove(); db.ref('sessions').remove();
+      myAccumulated = 0; myCurrentSec = 0;
       document.getElementById('my-accumulated').textContent = fmt(0);
       document.getElementById('my-current').textContent = fmt(0);
       document.getElementById('reset-box').classList.remove('open');
@@ -412,7 +476,15 @@
       alert('초기화가 완료됐어요!');
     });
 
-    if (nickname) showMain();
+    loadMembers();
+    if (nickname) {
+      db.ref('members').once('value').then(snap => {
+        const extra = snap.val() ? Object.keys(snap.val()) : [];
+        const all = [...new Set([...DEFAULT_MEMBERS, ...extra])];
+        if (all.includes(nickname)) showMain();
+        else localStorage.removeItem('sarangbu_nickname');
+      });
+    }
   </script>
 </body>
 </html>
