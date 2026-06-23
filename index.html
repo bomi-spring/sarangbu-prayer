@@ -7,45 +7,27 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #f5f5f5;
-      color: #1a1a1a;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      background: #f5f5f5; color: #1a1a1a;
+      min-height: 100vh; display: flex;
+      justify-content: center; align-items: flex-start;
       padding: 24px 16px 48px;
     }
-
     .container { width: 100%; max-width: 480px; }
-
     .app-title {
-      text-align: center;
-      font-size: 17px;
-      font-weight: 500;
-      color: #555;
-      margin-bottom: 20px;
-      letter-spacing: 0.02em;
+      text-align: center; font-size: 17px; font-weight: 500;
+      color: #555; margin-bottom: 20px; letter-spacing: 0.02em;
     }
-
-    /* 닉네임 화면 */
     #nickname-screen {
-      background: #fff;
-      border-radius: 16px;
-      border: 0.5px solid #e0e0e0;
-      padding: 2rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
+      background: #fff; border-radius: 16px; border: 0.5px solid #e0e0e0;
+      padding: 2rem 1.5rem; display: flex; flex-direction: column;
+      align-items: center; gap: 14px;
     }
     #nickname-screen h2 { font-size: 18px; font-weight: 500; }
     #nickname-screen p { font-size: 14px; color: #888; text-align: center; line-height: 1.6; }
     #nickname-input {
-      width: 100%; max-width: 280px;
-      font-size: 16px; padding: 10px 14px;
+      width: 100%; max-width: 280px; font-size: 16px; padding: 10px 14px;
       border-radius: 8px; border: 0.5px solid #ccc;
       background: #fff; color: #1a1a1a;
     }
@@ -58,50 +40,36 @@
       cursor: pointer; transition: background 0.15s;
     }
     #nickname-submit:hover { background: #f5f5f5; }
-
-    /* 메인 화면 */
     #main-screen { display: none; }
-
     .user-bar {
       display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 14px;
     }
     .user-name { font-size: 15px; font-weight: 500; }
     .btn-edit-name {
-      font-size: 13px; color: #888;
-      background: none; border: none; cursor: pointer;
-      text-decoration: underline; text-underline-offset: 2px;
+      font-size: 13px; color: #888; background: none; border: none;
+      cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
     }
     .btn-edit-name:hover { color: #333; }
-
-    /* 기도리스트 */
     .prayer-list-section {
-      background: #fff;
-      border-radius: 16px;
-      border: 0.5px solid #e0e0e0;
-      overflow: hidden;
-      margin-bottom: 12px;
+      background: #fff; border-radius: 16px; border: 0.5px solid #e0e0e0;
+      overflow: hidden; margin-bottom: 12px;
     }
     .prayer-list-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 13px 16px;
-      background: #fafafa;
-      cursor: pointer;
-      user-select: none;
+      padding: 13px 16px; background: #fafafa;
+      cursor: pointer; user-select: none;
     }
     .prayer-list-header-left { display: flex; align-items: center; gap: 8px; }
     .prayer-list-title { font-size: 14px; font-weight: 500; }
     .prayer-chevron { font-size: 16px; color: #999; transition: transform 0.2s; }
     .prayer-chevron.open { transform: rotate(180deg); }
-
     .prayer-list-body { display: none; padding: 14px 16px; }
     .prayer-list-body.open { display: block; }
-
     .prayer-content-display {
       font-size: 13px; color: #333; line-height: 1.75;
       white-space: pre-wrap; word-break: break-all;
-      max-height: 260px; overflow-y: auto;
-      margin-bottom: 10px; display: none;
+      max-height: 260px; overflow-y: auto; margin-bottom: 10px; display: none;
     }
     .prayer-empty {
       font-size: 13px; color: #aaa; text-align: center;
@@ -110,45 +78,34 @@
     .prayer-edit-area { display: none; }
     .prayer-edit-area.open { display: block; }
     .prayer-textarea {
-      width: 100%; min-height: 160px;
-      font-size: 13px; line-height: 1.7;
-      padding: 10px 12px;
-      border-radius: 8px; border: 0.5px solid #ccc;
-      background: #fff; color: #1a1a1a;
-      resize: vertical; font-family: inherit;
-      margin-bottom: 8px;
+      width: 100%; min-height: 160px; font-size: 13px; line-height: 1.7;
+      padding: 10px 12px; border-radius: 8px; border: 0.5px solid #ccc;
+      background: #fff; color: #1a1a1a; resize: vertical;
+      font-family: inherit; margin-bottom: 8px;
     }
     .prayer-textarea:focus { outline: none; border-color: #999; }
     .edit-btns { display: flex; gap: 8px; }
     .btn-edit-list, .btn-save-list, .btn-cancel-list {
-      font-size: 13px; padding: 6px 14px;
-      border-radius: 8px; border: 0.5px solid #ccc;
-      background: #fff; color: #1a1a1a;
+      font-size: 13px; padding: 6px 14px; border-radius: 8px;
+      border: 0.5px solid #ccc; background: #fff; color: #1a1a1a;
       cursor: pointer; transition: background 0.15s;
     }
     .btn-edit-list:hover, .btn-cancel-list:hover { background: #f5f5f5; }
     .btn-save-list { color: #1a6fc4; border-color: #a0c4f0; }
     .btn-save-list:hover { background: #eaf3fc; }
-
-    /* 타이머 카드 */
     .section-label {
       font-size: 11px; color: #999; letter-spacing: 0.06em;
       text-transform: uppercase; margin-bottom: 6px;
     }
     .time-card {
-      background: #fff;
-      border-radius: 16px;
-      border: 0.5px solid #e0e0e0;
-      padding: 14px 18px;
-      margin-bottom: 10px;
+      background: #fff; border-radius: 16px; border: 0.5px solid #e0e0e0;
+      padding: 14px 18px; margin-bottom: 10px;
     }
     .time-value {
       font-size: 34px; font-weight: 500; color: #1a1a1a;
       font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
     }
     .time-card.highlight .time-value { font-size: 50px; }
-
-    /* 버튼 */
     .controls { display: flex; gap: 10px; margin: 18px 0 0; }
     .btn-start, .btn-stop {
       flex: 1; padding: 13px; font-size: 15px; font-weight: 500;
@@ -161,13 +118,39 @@
     .btn-stop { color: #c0392b; border-color: #f0b8b8; }
     .btn-stop:hover { background: #fdf0f0; }
     .btn-start:disabled, .btn-stop:disabled { opacity: 0.35; cursor: default; background: #fff; }
+    .reset-section { text-align: center; margin-top: 16px; }
+    .btn-reset-toggle {
+      font-size: 12px; color: #bbb; background: none; border: none;
+      cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+    }
+    .btn-reset-toggle:hover { color: #999; }
+    .reset-box {
+      display: none; margin-top: 10px;
+      border: 0.5px solid #e0e0e0; border-radius: 8px;
+      padding: 12px 14px; background: #fafafa; text-align: left;
+    }
+    .reset-box.open { display: block; }
+    .reset-box p { font-size: 13px; color: #888; margin-bottom: 8px; }
+    .reset-row { display: flex; gap: 8px; }
+    .reset-pw-input {
+      flex: 1; font-size: 14px; padding: 7px 10px;
+      border-radius: 8px; border: 0.5px solid #ccc;
+      background: #fff; color: #1a1a1a;
+    }
+    .reset-pw-input:focus { outline: none; border-color: #999; }
+    .btn-reset-confirm {
+      font-size: 13px; padding: 7px 14px; border-radius: 8px;
+      border: 0.5px solid #f0b8b8; color: #c0392b;
+      background: #fff; cursor: pointer; transition: background 0.15s;
+    }
+    .btn-reset-confirm:hover { background: #fdf0f0; }
+    .reset-error { font-size: 12px; color: #c0392b; margin-top: 6px; display: none; }
   </style>
 </head>
 <body>
   <div class="container">
     <p class="app-title">🙏 사랑부 기도 스톱워치</p>
 
-    <!-- 닉네임 화면 -->
     <div id="nickname-screen">
       <h2>처음 오셨군요!</h2>
       <p>사용할 닉네임을 입력해주세요.<br>한 번 저장되면 다음엔 자동으로 불러와요.</p>
@@ -175,14 +158,12 @@
       <button id="nickname-submit">시작하기</button>
     </div>
 
-    <!-- 메인 화면 -->
     <div id="main-screen">
       <div class="user-bar">
         <span class="user-name" id="display-name"></span>
         <button class="btn-edit-name" id="btn-edit-name">닉네임 변경</button>
       </div>
 
-      <!-- 기도리스트 -->
       <div class="prayer-list-section">
         <div class="prayer-list-header" id="prayer-list-toggle">
           <div class="prayer-list-header-left">
@@ -209,7 +190,6 @@
         </div>
       </div>
 
-      <!-- 타이머 -->
       <p class="section-label">전체 기도시간</p>
       <div class="time-card">
         <div class="time-value" id="total-time">00:00:00</div>
@@ -233,6 +213,18 @@
           <i class="ti ti-player-stop" aria-hidden="true"></i> 기도 종료
         </button>
       </div>
+
+      <div class="reset-section">
+        <button class="btn-reset-toggle" id="btn-reset-toggle">기도시간 초기화</button>
+        <div class="reset-box" id="reset-box">
+          <p>비밀번호를 입력하면 전체 기도시간과 모든 누적시간이 초기화돼요.</p>
+          <div class="reset-row">
+            <input class="reset-pw-input" id="reset-pw-input" type="password" placeholder="비밀번호 4자리" maxlength="4" />
+            <button class="btn-reset-confirm" id="btn-reset-confirm">초기화</button>
+          </div>
+          <div class="reset-error" id="reset-error">비밀번호가 틀렸어요.</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -248,10 +240,10 @@
       messagingSenderId: "942634231069",
       appId: "1:942634231069:web:1e05fbfdc94fa185bd6df4"
     };
-
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    const RESET_PW = '0728';
     let nickname = localStorage.getItem('sarangbu_nickname') || '';
     let sessionInterval = null;
     let myAccumulated = 0;
@@ -323,9 +315,7 @@
       db.ref('prayerList').set(text).then(() => closeEdit());
     });
 
-    document.getElementById('btn-cancel-list').addEventListener('click', () => {
-      closeEdit();
-    });
+    document.getElementById('btn-cancel-list').addEventListener('click', closeEdit);
 
     function closeEdit() {
       document.getElementById('prayer-edit-area').classList.remove('open');
@@ -391,6 +381,35 @@
 
     document.getElementById('nickname-input').addEventListener('keydown', e => {
       if (e.key === 'Enter') document.getElementById('nickname-submit').click();
+    });
+
+    document.getElementById('btn-reset-toggle').addEventListener('click', () => {
+      document.getElementById('reset-box').classList.toggle('open');
+      document.getElementById('reset-pw-input').value = '';
+      document.getElementById('reset-error').style.display = 'none';
+    });
+
+    document.getElementById('btn-reset-confirm').addEventListener('click', () => {
+      const pw = document.getElementById('reset-pw-input').value.trim();
+      if (pw !== RESET_PW) {
+        document.getElementById('reset-error').style.display = 'block';
+        document.getElementById('reset-pw-input').value = '';
+        return;
+      }
+      const confirmed = confirm('전체 기도시간과 모든 누적시간이 초기화됩니다.\n정말 진행할까요?');
+      if (!confirmed) return;
+      if (isRunning) stopPrayer();
+      db.ref('total').set(0);
+      db.ref('users').remove();
+      db.ref('sessions').remove();
+      myAccumulated = 0;
+      myCurrentSec = 0;
+      document.getElementById('my-accumulated').textContent = fmt(0);
+      document.getElementById('my-current').textContent = fmt(0);
+      document.getElementById('reset-box').classList.remove('open');
+      document.getElementById('reset-pw-input').value = '';
+      document.getElementById('reset-error').style.display = 'none';
+      alert('초기화가 완료됐어요!');
     });
 
     if (nickname) showMain();
