@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사랑부 기도 스톱워치</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 24px 16px 48px;
+    }
+
+    .container { width: 100%; max-width: 480px; }
+
+    .app-title {
+      text-align: center;
+      font-size: 17px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    /* 닉네임 화면 */
+    #nickname-screen {
+      background: #fff;
+      border-radius: 16px;
+      border: 0.5px solid #e0e0e0;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    #nickname-screen h2 { font-size: 18px; font-weight: 500; }
+    #nickname-screen p { font-size: 14px; color: #888; text-align: center; line-height: 1.6; }
+    #nickname-input {
+      width: 100%; max-width: 280px;
+      font-size: 16px; padding: 10px 14px;
+      border-radius: 8px; border: 0.5px solid #ccc;
+      background: #fff; color: #1a1a1a;
+    }
+    #nickname-input:focus { outline: none; border-color: #999; }
+    #nickname-submit {
+      width: 100%; max-width: 280px; padding: 10px;
+      font-size: 15px; font-weight: 500;
+      background: #fff; border: 0.5px solid #ccc;
+      border-radius: 8px; color: #1a1a1a;
+      cursor: pointer; transition: background 0.15s;
+    }
+    #nickname-submit:hover { background: #f5f5f5; }
+
+    /* 메인 화면 */
+    #main-screen { display: none; }
+
+    .user-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .user-name { font-size: 15px; font-weight: 500; }
+    .btn-edit-name {
+      font-size: 13px; color: #888;
+      background: none; border: none; cursor: pointer;
+      text-decoration: underline; text-underline-offset: 2px;
+    }
+    .btn-edit-name:hover { color: #333; }
+
+    /* 기도리스트 */
+    .prayer-list-section {
+      background: #fff;
+      border-radius: 16px;
+      border: 0.5px solid #e0e0e0;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .prayer-list-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 13px 16px;
+      background: #fafafa;
+      cursor: pointer;
+      user-select: none;
+    }
+    .prayer-list-header-left { display: flex; align-items: center; gap: 8px; }
+    .prayer-list-title { font-size: 14px; font-weight: 500; }
+    .prayer-chevron { font-size: 16px; color: #999; transition: transform 0.2s; }
+    .prayer-chevron.open { transform: rotate(180deg); }
+
+    .prayer-list-body { display: none; padding: 14px 16px; }
+    .prayer-list-body.open { display: block; }
+
+    .prayer-content-display {
+      font-size: 13px; color: #333; line-height: 1.75;
+      white-space: pre-wrap; word-break: break-all;
+      max-height: 260px; overflow-y: auto;
+      margin-bottom: 10px; display: none;
+    }
+    .prayer-empty {
+      font-size: 13px; color: #aaa; text-align: center;
+      padding: 14px 0; margin-bottom: 10px;
+    }
+    .prayer-edit-area { display: none; }
+    .prayer-edit-area.open { display: block; }
+    .prayer-textarea {
+      width: 100%; min-height: 160px;
+      font-size: 13px; line-height: 1.7;
+      padding: 10px 12px;
+      border-radius: 8px; border: 0.5px solid #ccc;
+      background: #fff; color: #1a1a1a;
+      resize: vertical; font-family: inherit;
+      margin-bottom: 8px;
+    }
+    .prayer-textarea:focus { outline: none; border-color: #999; }
+    .edit-btns { display: flex; gap: 8px; }
+    .btn-edit-list, .btn-save-list, .btn-cancel-list {
+      font-size: 13px; padding: 6px 14px;
+      border-radius: 8px; border: 0.5px solid #ccc;
+      background: #fff; color: #1a1a1a;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .btn-edit-list:hover, .btn-cancel-list:hover { background: #f5f5f5; }
+    .btn-save-list { color: #1a6fc4; border-color: #a0c4f0; }
+    .btn-save-list:hover { background: #eaf3fc; }
+
+    /* 타이머 카드 */
+    .section-label {
+      font-size: 11px; color: #999; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .time-card {
+      background: #fff;
+      border-radius: 16px;
+      border: 0.5px solid #e0e0e0;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+    }
+    .time-value {
+      font-size: 34px; font-weight: 500; color: #1a1a1a;
+      font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+    }
+    .time-card.highlight .time-value { font-size: 50px; }
+
+    /* 버튼 */
+    .controls { display: flex; gap: 10px; margin: 18px 0 0; }
+    .btn-start, .btn-stop {
+      flex: 1; padding: 13px; font-size: 15px; font-weight: 500;
+      border-radius: 12px; border: 0.5px solid #ccc;
+      cursor: pointer; transition: background 0.15s, opacity 0.15s;
+      background: #fff; color: #1a1a1a;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn-start:hover { background: #f5f5f5; }
+    .btn-stop { color: #c0392b; border-color: #f0b8b8; }
+    .btn-stop:hover { background: #fdf0f0; }
+    .btn-start:disabled, .btn-stop:disabled { opacity: 0.35; cursor: default; background: #fff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p class="app-title">🙏 사랑부 기도 스톱워치</p>
+
+    <!-- 닉네임 화면 -->
+    <div id="nickname-screen">
+      <h2>처음 오셨군요!</h2>
+      <p>사용할 닉네임을 입력해주세요.<br>한 번 저장되면 다음엔 자동으로 불러와요.</p>
+      <input id="nickname-input" type="text" placeholder="닉네임 입력" maxlength="20" />
+      <button id="nickname-submit">시작하기</button>
+    </div>
+
+    <!-- 메인 화면 -->
+    <div id="main-screen">
+      <div class="user-bar">
+        <span class="user-name" id="display-name"></span>
+        <button class="btn-edit-name" id="btn-edit-name">닉네임 변경</button>
+      </div>
+
+      <!-- 기도리스트 -->
+      <div class="prayer-list-section">
+        <div class="prayer-list-header" id="prayer-list-toggle">
+          <div class="prayer-list-header-left">
+            <i class="ti ti-list" aria-hidden="true" style="font-size:16px; color:#999;"></i>
+            <span class="prayer-list-title">기도리스트</span>
+          </div>
+          <i class="ti ti-chevron-down prayer-chevron" id="prayer-chevron" aria-hidden="true"></i>
+        </div>
+        <div class="prayer-list-body" id="prayer-list-body">
+          <div class="prayer-content-display" id="prayer-display"></div>
+          <div class="prayer-empty" id="prayer-empty">아직 기도리스트가 없어요.</div>
+          <div class="prayer-edit-area" id="prayer-edit-area">
+            <textarea class="prayer-textarea" id="prayer-textarea" placeholder="기도리스트를 자유롭게 입력하거나 붙여넣기 하세요."></textarea>
+            <div class="edit-btns">
+              <button class="btn-save-list" id="btn-save-list">저장</button>
+              <button class="btn-cancel-list" id="btn-cancel-list">취소</button>
+            </div>
+          </div>
+          <div id="view-btns">
+            <button class="btn-edit-list" id="btn-edit-list">
+              <i class="ti ti-edit" aria-hidden="true"></i> 수정
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 타이머 -->
+      <p class="section-label">전체 기도시간</p>
+      <div class="time-card">
+        <div class="time-value" id="total-time">00:00:00</div>
+      </div>
+
+      <p class="section-label">나의 누적 기도시간</p>
+      <div class="time-card">
+        <div class="time-value" id="my-accumulated">00:00:00</div>
+      </div>
+
+      <p class="section-label">나의 현재 기도시간</p>
+      <div class="time-card highlight">
+        <div class="time-value" id="my-current">00:00:00</div>
+      </div>
+
+      <div class="controls">
+        <button class="btn-start" id="btn-start">
+          <i class="ti ti-player-play" aria-hidden="true"></i> 기도 시작
+        </button>
+        <button class="btn-stop" id="btn-stop" disabled>
+          <i class="ti ti-player-stop" aria-hidden="true"></i> 기도 종료
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDNVdBzA0J64fITZxhdaVSQ9__sbljmkew",
+      authDomain: "sarangbu-prayer.firebaseapp.com",
+      databaseURL: "https://sarangbu-prayer-default-rtdb.firebaseio.com",
+      projectId: "sarangbu-prayer",
+      storageBucket: "sarangbu-prayer.firebasestorage.app",
+      messagingSenderId: "942634231069",
+      appId: "1:942634231069:web:1e05fbfdc94fa185bd6df4"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let nickname = localStorage.getItem('sarangbu_nickname') || '';
+    let sessionInterval = null;
+    let myAccumulated = 0;
+    let myCurrentSec = 0;
+    let sessionStartTime = null;
+    let isRunning = false;
+
+    function fmt(sec) {
+      const h = Math.floor(sec / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = sec % 60;
+      return [h, m, s].map(v => String(v).padStart(2, '0')).join(':');
+    }
+
+    function showMain() {
+      document.getElementById('nickname-screen').style.display = 'none';
+      document.getElementById('main-screen').style.display = 'block';
+      document.getElementById('display-name').textContent = nickname;
+      loadMyAccumulated();
+      listenTotal();
+      listenPrayerList();
+    }
+
+    function loadMyAccumulated() {
+      db.ref('users/' + nickname + '/accumulated').once('value').then(snap => {
+        myAccumulated = snap.val() || 0;
+        document.getElementById('my-accumulated').textContent = fmt(myAccumulated);
+      });
+    }
+
+    function listenTotal() {
+      db.ref('total').on('value', snap => {
+        document.getElementById('total-time').textContent = fmt(snap.val() || 0);
+      });
+    }
+
+    function listenPrayerList() {
+      db.ref('prayerList').on('value', snap => {
+        const text = snap.val() || '';
+        const display = document.getElementById('prayer-display');
+        const empty = document.getElementById('prayer-empty');
+        document.getElementById('prayer-textarea').value = text;
+        if (text) {
+          display.textContent = text;
+          display.style.display = 'block';
+          empty.style.display = 'none';
+        } else {
+          display.style.display = 'none';
+          empty.style.display = 'block';
+        }
+      });
+    }
+
+    document.getElementById('prayer-list-toggle').addEventListener('click', () => {
+      document.getElementById('prayer-list-body').classList.toggle('open');
+      document.getElementById('prayer-chevron').classList.toggle('open');
+    });
+
+    document.getElementById('btn-edit-list').addEventListener('click', () => {
+      document.getElementById('prayer-edit-area').classList.add('open');
+      document.getElementById('view-btns').style.display = 'none';
+      document.getElementById('prayer-display').style.display = 'none';
+      document.getElementById('prayer-empty').style.display = 'none';
+      document.getElementById('prayer-textarea').focus();
+    });
+
+    document.getElementById('btn-save-list').addEventListener('click', () => {
+      const text = document.getElementById('prayer-textarea').value.trim();
+      db.ref('prayerList').set(text).then(() => closeEdit());
+    });
+
+    document.getElementById('btn-cancel-list').addEventListener('click', () => {
+      closeEdit();
+    });
+
+    function closeEdit() {
+      document.getElementById('prayer-edit-area').classList.remove('open');
+      document.getElementById('view-btns').style.display = 'block';
+    }
+
+    function startPrayer() {
+      if (isRunning) return;
+      isRunning = true;
+      myCurrentSec = 0;
+      sessionStartTime = Date.now();
+      document.getElementById('btn-start').disabled = true;
+      document.getElementById('btn-stop').disabled = false;
+      sessionInterval = setInterval(() => {
+        myCurrentSec = Math.floor((Date.now() - sessionStartTime) / 1000);
+        document.getElementById('my-current').textContent = fmt(myCurrentSec);
+        db.ref('sessions/' + nickname).set({ active: true, started: sessionStartTime });
+      }, 1000);
+    }
+
+    function stopPrayer() {
+      if (!isRunning) return;
+      isRunning = false;
+      clearInterval(sessionInterval);
+      sessionInterval = null;
+      document.getElementById('btn-start').disabled = false;
+      document.getElementById('btn-stop').disabled = true;
+      const elapsed = myCurrentSec;
+      db.ref('users/' + nickname + '/accumulated').transaction(cur => (cur || 0) + elapsed);
+      db.ref('total').transaction(cur => (cur || 0) + elapsed);
+      db.ref('sessions/' + nickname).remove();
+      myAccumulated += elapsed;
+      myCurrentSec = 0;
+      document.getElementById('my-accumulated').textContent = fmt(myAccumulated);
+      document.getElementById('my-current').textContent = fmt(0);
+    }
+
+    document.getElementById('btn-start').addEventListener('click', startPrayer);
+    document.getElementById('btn-stop').addEventListener('click', stopPrayer);
+
+    document.getElementById('btn-edit-name').addEventListener('click', () => {
+      const confirmed = confirm('닉네임을 변경하면 나의 누적 기도시간이 초기화됩니다.\n정말 변경하시겠어요?');
+      if (!confirmed) return;
+      if (isRunning) stopPrayer();
+      localStorage.removeItem('sarangbu_nickname');
+      nickname = '';
+      myAccumulated = 0;
+      myCurrentSec = 0;
+      document.getElementById('my-accumulated').textContent = fmt(0);
+      document.getElementById('my-current').textContent = fmt(0);
+      document.getElementById('main-screen').style.display = 'none';
+      document.getElementById('nickname-screen').style.display = 'flex';
+      document.getElementById('nickname-input').value = '';
+    });
+
+    document.getElementById('nickname-submit').addEventListener('click', () => {
+      const val = document.getElementById('nickname-input').value.trim();
+      if (!val) return;
+      nickname = val;
+      localStorage.setItem('sarangbu_nickname', nickname);
+      showMain();
+    });
+
+    document.getElementById('nickname-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('nickname-submit').click();
+    });
+
+    if (nickname) showMain();
+  </script>
+</body>
+</html>
