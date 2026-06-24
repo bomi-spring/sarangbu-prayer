@@ -15,155 +15,98 @@
       padding: 24px 16px 48px;
     }
     .container { width: 100%; max-width: 480px; }
-    .app-title {
-      text-align: center; font-size: 17px; font-weight: 500;
-      color: #555; margin-bottom: 20px; letter-spacing: 0.02em;
-    }
-    #name-screen {
-      display: flex; flex-direction: column; align-items: center; gap: 14px;
-    }
-    #name-screen h2 { font-size: 18px; font-weight: 500; }
-    .screen-desc { font-size: 13px; color: #888; text-align: center; line-height: 1.6; }
-    .screen-subdesc { font-size: 12px; color: #aaa; text-align: center; line-height: 1.5; }
-    .name-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%;
-    }
-    .name-btn {
-      padding: 10px 4px; font-size: 14px; font-weight: 500;
-      border-radius: 8px; border: 0.5px solid #ddd;
-      background: #fff; color: #1a1a1a;
-      cursor: pointer; transition: background 0.15s; text-align: center;
-    }
+    .app-title { text-align: center; font-size: 17px; font-weight: 500; color: #555; margin-bottom: 20px; }
+
+    .screen { display: none; flex-direction: column; align-items: center; gap: 14px; }
+    .screen.active { display: flex; }
+    h2 { font-size: 18px; font-weight: 500; }
+    .subdesc { font-size: 12px; color: #aaa; text-align: center; line-height: 1.5; }
+
+    .name-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; }
+    .name-btn { padding: 10px 4px; font-size: 14px; font-weight: 500; border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a; cursor: pointer; transition: background 0.15s; text-align: center; }
     .name-btn:hover { background: #f5f5f5; }
     .name-btn.selected { background: #eaf3fc; border-color: #a0c4f0; color: #1a6fc4; }
-    .divider {
-      width: 100%; display: flex; align-items: center; gap: 10px;
-    }
+
+    .divider { width: 100%; display: flex; align-items: center; gap: 10px; }
     .divider-line { flex: 1; height: 0.5px; background: #e0e0e0; }
     .divider-text { font-size: 12px; color: #bbb; white-space: nowrap; }
-    .register-box {
-      width: 100%; border: 0.5px solid #e0e0e0;
-      border-radius: 12px; padding: 14px; background: #fafafa;
-    }
+
+    .register-box { width: 100%; border: 0.5px solid #e0e0e0; border-radius: 12px; padding: 14px; background: #fafafa; }
     .register-box p { font-size: 12px; color: #888; line-height: 1.6; margin-bottom: 10px; }
     .register-box p strong { color: #333; }
     .register-row { display: flex; gap: 8px; }
-    .register-input {
-      flex: 1; font-size: 14px; padding: 8px 10px;
-      border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a;
-    }
+    .register-input { flex: 1; font-size: 14px; padding: 8px 10px; border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a; }
     .register-input:focus { outline: none; border-color: #999; }
-    .btn-register {
-      font-size: 13px; padding: 8px 14px; border-radius: 8px;
-      border: 0.5px solid #ddd; background: #fff; color: #1a1a1a;
-      cursor: pointer; transition: background 0.15s; white-space: nowrap;
-    }
+    .btn-register { font-size: 13px; padding: 8px 14px; border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a; cursor: pointer; transition: background 0.15s; white-space: nowrap; }
     .btn-register:hover { background: #f5f5f5; }
     .register-error { font-size: 12px; color: #c0392b; margin-top: 6px; display: none; }
-    .confirm-btn {
-      width: 100%; max-width: 320px; padding: 11px;
-      font-size: 15px; font-weight: 500;
-      background: #fff; border: 0.5px solid #ddd;
-      border-radius: 8px; color: #1a1a1a;
-      cursor: pointer; transition: background 0.15s; opacity: 0.4; pointer-events: none;
-    }
-    .confirm-btn.active { opacity: 1; pointer-events: auto; }
-    .confirm-btn.active:hover { background: #f5f5f5; }
+
+    .primary-btn { width: 100%; max-width: 320px; padding: 11px; font-size: 15px; font-weight: 500; background: #fff; border: 0.5px solid #ddd; border-radius: 8px; color: #1a1a1a; cursor: pointer; transition: background 0.15s; opacity: 0.4; pointer-events: none; }
+    .primary-btn.active { opacity: 1; pointer-events: auto; }
+    .primary-btn.active:hover { background: #f5f5f5; }
+
+    .pw-card { width: 100%; max-width: 320px; border: 0.5px solid #e0e0e0; border-radius: 16px; padding: 20px; background: #fafafa; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .pw-name { font-size: 16px; font-weight: 500; }
+    .pw-hint { font-size: 13px; color: #888; text-align: center; line-height: 1.6; }
+    .pw-dots { display: flex; gap: 12px; margin: 4px 0; }
+    .pw-dot { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #ddd; background: #fff; transition: background 0.15s; }
+    .pw-dot.filled { background: #1a1a1a; border-color: #1a1a1a; }
+    .pw-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; }
+    .pw-key { padding: 14px; font-size: 18px; border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a; cursor: pointer; transition: background 0.15s; text-align: center; }
+    .pw-key:hover { background: #f5f5f5; }
+    .pw-key.del { font-size: 14px; color: #888; }
+    .pw-error { font-size: 13px; color: #c0392b; min-height: 18px; }
+    .btn-back { font-size: 13px; color: #aaa; background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+
     #main-screen { display: none; }
-    .user-bar {
-      display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
-    }
+    .user-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
     .user-name { font-size: 15px; font-weight: 500; }
-    .btn-change-name {
-      font-size: 13px; color: #888; background: none; border: none;
-      cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
-    }
-    .btn-change-name:hover { color: #333; }
-    .prayer-list-section {
-      background: #fff; border-radius: 16px; border: 0.5px solid #e0e0e0;
-      overflow: hidden; margin-bottom: 12px;
-    }
-    .prayer-list-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 13px 16px; background: #fafafa; cursor: pointer; user-select: none;
-    }
+    .user-actions { display: flex; gap: 10px; }
+    .btn-text { font-size: 13px; color: #888; background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+    .btn-text:hover { color: #333; }
+
+    .prayer-list-section { background: #fff; border-radius: 16px; border: 0.5px solid #e0e0e0; overflow: hidden; margin-bottom: 12px; }
+    .prayer-list-header { display: flex; align-items: center; justify-content: space-between; padding: 13px 16px; background: #fafafa; cursor: pointer; user-select: none; }
     .prayer-list-header-left { display: flex; align-items: center; gap: 8px; }
     .prayer-list-title { font-size: 14px; font-weight: 500; }
     .prayer-chevron { font-size: 16px; color: #999; transition: transform 0.2s; }
     .prayer-chevron.open { transform: rotate(180deg); }
     .prayer-list-body { display: none; padding: 14px 16px; }
     .prayer-list-body.open { display: block; }
-    .prayer-content-display {
-      font-size: 13px; color: #333; line-height: 1.75;
-      white-space: pre-wrap; word-break: break-all;
-      max-height: 260px; overflow-y: auto; margin-bottom: 10px; display: none;
-    }
+    .prayer-content-display { font-size: 13px; color: #333; line-height: 1.75; white-space: pre-wrap; word-break: break-all; max-height: 260px; overflow-y: auto; margin-bottom: 10px; display: none; }
     .prayer-empty { font-size: 13px; color: #aaa; text-align: center; padding: 14px 0; margin-bottom: 10px; }
     .prayer-edit-area { display: none; }
     .prayer-edit-area.open { display: block; }
-    .prayer-textarea {
-      width: 100%; min-height: 160px; font-size: 13px; line-height: 1.7;
-      padding: 10px 12px; border-radius: 8px; border: 0.5px solid #ddd;
-      background: #fff; color: #1a1a1a; resize: vertical; font-family: inherit; margin-bottom: 8px;
-    }
+    .prayer-textarea { width: 100%; min-height: 160px; font-size: 13px; line-height: 1.7; padding: 10px 12px; border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a; resize: vertical; font-family: inherit; margin-bottom: 8px; }
     .prayer-textarea:focus { outline: none; border-color: #999; }
     .edit-btns { display: flex; gap: 8px; }
-    .btn-edit-list, .btn-save-list, .btn-cancel-list {
-      font-size: 13px; padding: 6px 14px; border-radius: 8px;
-      border: 0.5px solid #ddd; background: #fff; color: #1a1a1a;
-      cursor: pointer; transition: background 0.15s;
-    }
+    .btn-edit-list, .btn-save-list, .btn-cancel-list { font-size: 13px; padding: 6px 14px; border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a; cursor: pointer; transition: background 0.15s; }
     .btn-edit-list:hover, .btn-cancel-list:hover { background: #f5f5f5; }
     .btn-save-list { color: #1a6fc4; border-color: #a0c4f0; }
     .btn-save-list:hover { background: #eaf3fc; }
-    .section-label {
-      font-size: 11px; color: #999; letter-spacing: 0.06em;
-      text-transform: uppercase; margin-bottom: 6px;
-    }
-    .time-card {
-      background: #fff; border-radius: 16px; border: 0.5px solid #e0e0e0;
-      padding: 14px 18px; margin-bottom: 10px;
-    }
-    .time-value {
-      font-size: 34px; font-weight: 500; color: #1a1a1a;
-      font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
-    }
+
+    .section-label { font-size: 11px; color: #999; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
+    .time-card { background: #fff; border-radius: 16px; border: 0.5px solid #e0e0e0; padding: 14px 18px; margin-bottom: 10px; }
+    .time-value { font-size: 34px; font-weight: 500; color: #1a1a1a; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
     .time-card.highlight .time-value { font-size: 50px; }
+
     .controls { display: flex; gap: 10px; margin: 18px 0 0; }
-    .btn-start, .btn-stop {
-      flex: 1; padding: 13px; font-size: 15px; font-weight: 500;
-      border-radius: 12px; border: 0.5px solid #ddd;
-      cursor: pointer; transition: background 0.15s, opacity 0.15s;
-      background: #fff; color: #1a1a1a;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-    }
+    .btn-start, .btn-stop { flex: 1; padding: 13px; font-size: 15px; font-weight: 500; border-radius: 12px; border: 0.5px solid #ddd; cursor: pointer; transition: background 0.15s, opacity 0.15s; background: #fff; color: #1a1a1a; display: flex; align-items: center; justify-content: center; gap: 6px; }
     .btn-start:hover { background: #f5f5f5; }
     .btn-stop { color: #c0392b; border-color: #f0b8b8; }
     .btn-stop:hover { background: #fdf0f0; }
     .btn-start:disabled, .btn-stop:disabled { opacity: 0.35; cursor: default; background: #fff; }
+
     .reset-section { text-align: center; margin-top: 16px; }
-    .btn-reset-toggle {
-      font-size: 12px; color: #bbb; background: none; border: none;
-      cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
-    }
+    .btn-reset-toggle { font-size: 12px; color: #bbb; background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
     .btn-reset-toggle:hover { color: #999; }
-    .reset-box {
-      display: none; margin-top: 10px; border: 0.5px solid #e0e0e0;
-      border-radius: 8px; padding: 12px 14px; background: #fafafa; text-align: left;
-    }
+    .reset-box { display: none; margin-top: 10px; border: 0.5px solid #e0e0e0; border-radius: 8px; padding: 12px 14px; background: #fafafa; text-align: left; }
     .reset-box.open { display: block; }
     .reset-box p { font-size: 13px; color: #888; margin-bottom: 8px; }
     .reset-row { display: flex; gap: 8px; }
-    .reset-pw-input {
-      flex: 1; font-size: 14px; padding: 7px 10px;
-      border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a;
-    }
+    .reset-pw-input { flex: 1; font-size: 14px; padding: 7px 10px; border-radius: 8px; border: 0.5px solid #ddd; background: #fff; color: #1a1a1a; }
     .reset-pw-input:focus { outline: none; border-color: #999; }
-    .btn-reset-confirm {
-      font-size: 13px; padding: 7px 14px; border-radius: 8px;
-      border: 0.5px solid #f0b8b8; color: #c0392b;
-      background: #fff; cursor: pointer; transition: background 0.15s;
-    }
+    .btn-reset-confirm { font-size: 13px; padding: 7px 14px; border-radius: 8px; border: 0.5px solid #f0b8b8; color: #c0392b; background: #fff; cursor: pointer; transition: background 0.15s; }
     .btn-reset-confirm:hover { background: #fdf0f0; }
     .reset-error { font-size: 12px; color: #c0392b; margin-top: 6px; display: none; }
     .loading-text { font-size: 13px; color: #bbb; text-align: center; padding: 16px 0; grid-column: span 4; }
@@ -173,42 +116,75 @@
   <div class="container">
     <p class="app-title">🙏 사랑부 기도 스톱워치</p>
 
-    <div id="name-screen">
+    <!-- 이름 선택 -->
+    <div id="name-screen" class="screen active">
       <h2>본인 이름을 선택해주세요</h2>
-      <p class="screen-subdesc">이름은 개인 누적 기도시간 집계용으로만 사용돼요.</p>
-      <div class="name-grid" id="name-grid">
-        <div class="loading-text">목록 불러오는 중...</div>
-      </div>
-      <div class="divider">
-        <div class="divider-line"></div>
-        <span class="divider-text">목록에 없으면 등록</span>
-        <div class="divider-line"></div>
-      </div>
+      <p class="subdesc">이름은 개인 누적 기도시간 집계용으로만 사용돼요.</p>
+      <div class="name-grid" id="name-grid"><div class="loading-text">목록 불러오는 중...</div></div>
+      <div class="divider"><div class="divider-line"></div><span class="divider-text">목록에 없으면 등록</span><div class="divider-line"></div></div>
       <div class="register-box">
-        <p>
-          <strong>이름 등록 안내</strong><br>
-          이름은 개인 누적 기도시간 집계용으로만 사용돼요.<br>
-          한 번 등록한 이름은 변경할 수 없으니 신중하게 입력해주세요.
-        </p>
+        <p><strong>이름 등록 안내</strong><br>이름은 개인 누적 기도시간 집계용으로만 사용돼요.<br>한 번 등록한 이름은 변경할 수 없으니 신중하게 입력해주세요.</p>
         <div class="register-row">
           <input class="register-input" id="register-input" type="text" placeholder="등록할 이름 입력" maxlength="10" />
           <button class="btn-register" id="btn-register">등록</button>
         </div>
         <div class="register-error" id="register-error"></div>
       </div>
-      <button class="confirm-btn" id="confirm-btn" disabled>시작하기</button>
+      <button class="primary-btn" id="confirm-btn" disabled>다음</button>
     </div>
 
+    <!-- 비밀번호 입력 -->
+    <div id="pw-screen" class="screen">
+      <div class="pw-card">
+        <div class="pw-name" id="pw-screen-name"></div>
+        <div class="pw-hint" id="pw-hint">비밀번호를 입력해주세요.</div>
+        <div class="pw-dots" id="pw-dots">
+          <div class="pw-dot"></div><div class="pw-dot"></div><div class="pw-dot"></div><div class="pw-dot"></div>
+        </div>
+        <div class="pw-keypad" id="pw-keypad">
+          <button class="pw-key" data-key="1">1</button><button class="pw-key" data-key="2">2</button><button class="pw-key" data-key="3">3</button>
+          <button class="pw-key" data-key="4">4</button><button class="pw-key" data-key="5">5</button><button class="pw-key" data-key="6">6</button>
+          <button class="pw-key" data-key="7">7</button><button class="pw-key" data-key="8">8</button><button class="pw-key" data-key="9">9</button>
+          <div></div><button class="pw-key" data-key="0">0</button><button class="pw-key del" data-key="del">⌫</button>
+        </div>
+        <div class="pw-error" id="pw-error"></div>
+        <button class="btn-back" id="pw-back">← 이름 다시 선택</button>
+      </div>
+    </div>
+
+    <!-- 비밀번호 변경 -->
+    <div id="pw-change-screen" class="screen">
+      <div class="pw-card">
+        <div class="pw-name">비밀번호 변경</div>
+        <div class="pw-hint" id="pw-change-hint">새 비밀번호를 입력해주세요.</div>
+        <div class="pw-dots" id="pw-change-dots">
+          <div class="pw-dot"></div><div class="pw-dot"></div><div class="pw-dot"></div><div class="pw-dot"></div>
+        </div>
+        <div class="pw-keypad">
+          <button class="pw-key" data-change="1">1</button><button class="pw-key" data-change="2">2</button><button class="pw-key" data-change="3">3</button>
+          <button class="pw-key" data-change="4">4</button><button class="pw-key" data-change="5">5</button><button class="pw-key" data-change="6">6</button>
+          <button class="pw-key" data-change="7">7</button><button class="pw-key" data-change="8">8</button><button class="pw-key" data-change="9">9</button>
+          <div></div><button class="pw-key" data-change="0">0</button><button class="pw-key del" data-change="del">⌫</button>
+        </div>
+        <div class="pw-error" id="pw-change-error"></div>
+        <button class="btn-back" id="pw-change-back">← 취소</button>
+      </div>
+    </div>
+
+    <!-- 메인 -->
     <div id="main-screen">
       <div class="user-bar">
         <span class="user-name" id="display-name"></span>
-        <button class="btn-change-name" id="btn-change-name">이름 변경</button>
+        <div class="user-actions">
+          <button class="btn-text" id="btn-change-pw">비밀번호 변경</button>
+          <button class="btn-text" id="btn-change-name">이름 변경</button>
+        </div>
       </div>
 
       <div class="prayer-list-section">
         <div class="prayer-list-header" id="prayer-list-toggle">
           <div class="prayer-list-header-left">
-            <i class="ti ti-list" style="font-size:16px; color:#999;"></i>
+            <i class="ti ti-list" style="font-size:16px;color:#999;"></i>
             <span class="prayer-list-title">기도리스트</span>
           </div>
           <i class="ti ti-chevron-down prayer-chevron" id="prayer-chevron"></i>
@@ -223,11 +199,7 @@
               <button class="btn-cancel-list" id="btn-cancel-list">취소</button>
             </div>
           </div>
-          <div id="view-btns">
-            <button class="btn-edit-list" id="btn-edit-list">
-              <i class="ti ti-edit"></i> 수정
-            </button>
-          </div>
+          <div id="view-btns"><button class="btn-edit-list" id="btn-edit-list"><i class="ti ti-edit"></i> 수정</button></div>
         </div>
       </div>
 
@@ -239,12 +211,8 @@
       <div class="time-card highlight"><div class="time-value" id="my-current">00:00:00</div></div>
 
       <div class="controls">
-        <button class="btn-start" id="btn-start">
-          <i class="ti ti-player-play"></i> 기도 시작
-        </button>
-        <button class="btn-stop" id="btn-stop" disabled>
-          <i class="ti ti-player-stop"></i> 기도 종료
-        </button>
+        <button class="btn-start" id="btn-start"><i class="ti ti-player-play"></i> 기도 시작</button>
+        <button class="btn-stop" id="btn-stop" disabled><i class="ti ti-player-stop"></i> 기도 종료</button>
       </div>
 
       <div class="reset-section">
@@ -252,7 +220,7 @@
         <div class="reset-box" id="reset-box">
           <p>비밀번호를 입력하면 전체 기도시간과 모든 누적시간이 초기화돼요.</p>
           <div class="reset-row">
-            <input class="reset-pw-input" id="reset-pw-input" type="password" placeholder="비밀번호 4자리" maxlength="4" />
+            <input class="reset-pw-input" id="reset-pw-input" type="password" placeholder="관리자 비밀번호" maxlength="4" />
             <button class="btn-reset-confirm" id="btn-reset-confirm">초기화</button>
           </div>
           <div class="reset-error" id="reset-error">비밀번호가 틀렸어요.</div>
@@ -265,7 +233,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
   <script>
     const DEFAULT_MEMBERS = ['건하','광식','규리','규택','금','근원','나희','단','덕휴','동균','로사','매영','민기','민석','민지','미희','봄이','성규','성은','성휴','소정','소피','승귀','슬기','승희','석영','아연','언용','웅','은아','인국','인규','인후','재희','정민','정인','종원','주영','지수','지원','지훈','진','진아','진우','쥬스틴','셀레스트','태우','하경','한나','혜민','혜인','혜지','효민','희선','희연','희원','유진'];
-    const RESET_PW = '0728';
+    const ADMIN_PW = '0728';
+    const DEFAULT_USER_PW = '0000';
 
     const firebaseConfig = {
       apiKey: "AIzaSyDNVdBzA0J64fITZxhdaVSQ9__sbljmkew",
@@ -280,23 +249,24 @@
     const db = firebase.database();
 
     let nickname = localStorage.getItem('sarangbu_nickname') || '';
+    let savedPw = localStorage.getItem('sarangbu_pw') || '';
     let sessionInterval = null;
-    let myAccumulated = 0;
-    let myCurrentSec = 0;
-    let sessionStartTime = null;
-    let isRunning = false;
-    let selectedName = '';
-    let allMembers = [];
+    let myAccumulated = 0, myCurrentSec = 0;
+    let sessionStartTime = null, isRunning = false;
+    let selectedName = '', allMembers = [];
+    let pwInput = '', pwChangeStep = 1, pwChangeFirst = '', pwChangeCurrent = '';
 
     function fmt(sec) {
-      const h = Math.floor(sec / 3600);
-      const m = Math.floor((sec % 3600) / 60);
-      const s = sec % 60;
+      const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
       return [h, m, s].map(v => String(v).padStart(2, '0')).join(':');
     }
+    function sortKorean(arr) { return [...arr].sort((a, b) => a.localeCompare(b, 'ko')); }
 
-    function sortKorean(arr) {
-      return [...arr].sort((a, b) => a.localeCompare(b, 'ko'));
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('main-screen').style.display = 'none';
+      if (id === 'main') document.getElementById('main-screen').style.display = 'block';
+      else document.getElementById(id).classList.add('active');
     }
 
     function renderGrid(members) {
@@ -304,15 +274,12 @@
       grid.innerHTML = '';
       sortKorean(members).forEach(name => {
         const btn = document.createElement('button');
-        btn.className = 'name-btn';
-        btn.textContent = name;
+        btn.className = 'name-btn'; btn.textContent = name;
         btn.addEventListener('click', () => {
           document.querySelectorAll('.name-btn').forEach(b => b.classList.remove('selected'));
-          btn.classList.add('selected');
-          selectedName = name;
-          const confirmBtn = document.getElementById('confirm-btn');
-          confirmBtn.disabled = false;
-          confirmBtn.classList.add('active');
+          btn.classList.add('selected'); selectedName = name;
+          const cb = document.getElementById('confirm-btn');
+          cb.disabled = false; cb.classList.add('active');
         });
         grid.appendChild(btn);
       });
@@ -327,9 +294,7 @@
     }
 
     document.getElementById('btn-register').addEventListener('click', registerName);
-    document.getElementById('register-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') registerName();
-    });
+    document.getElementById('register-input').addEventListener('keydown', e => { if (e.key === 'Enter') registerName(); });
 
     function registerName() {
       const val = document.getElementById('register-input').value.trim();
@@ -337,8 +302,7 @@
       errEl.style.display = 'none';
       if (!val) { errEl.textContent = '이름을 입력해주세요.'; errEl.style.display = 'block'; return; }
       if (allMembers.includes(val)) { errEl.textContent = '이미 목록에 있는 이름이에요. 위에서 선택해주세요.'; errEl.style.display = 'block'; return; }
-      const confirmed = confirm('"' + val + '"(으)로 등록할까요?\n\n이름은 개인 누적 기도시간 집계용으로만 사용되며,\n한 번 등록한 이름은 변경할 수 없어요.');
-      if (!confirmed) return;
+      if (!confirm('"' + val + '"(으)로 등록할까요?\n\n이름은 개인 누적 기도시간 집계용으로만 사용되며,\n한 번 등록한 이름은 변경할 수 없어요.')) return;
       db.ref('members/' + val).set(true).then(() => {
         allMembers = sortKorean([...allMembers, val]);
         renderGrid(allMembers);
@@ -351,20 +315,98 @@
       });
     }
 
-    document.getElementById('confirm-btn').addEventListener('click', () => {
-      if (!selectedName) return;
-      nickname = selectedName;
-      localStorage.setItem('sarangbu_nickname', nickname);
-      showMain();
+    document.getElementById('confirm-btn').addEventListener('click', () => { if (selectedName) goToPwScreen(selectedName); });
+
+    function goToPwScreen(name) {
+      pwInput = ''; updatePwDots('pw-dots', 0);
+      document.getElementById('pw-screen-name').textContent = name;
+      document.getElementById('pw-error').textContent = '';
+      db.ref('passwords/' + name).once('value').then(snap => {
+        document.getElementById('pw-hint').innerHTML = snap.val() !== null
+          ? '비밀번호를 입력해주세요.'
+          : '비밀번호를 입력해주세요.<br><small style="color:#bbb;font-size:11px;">초기 비밀번호는 0000이에요.</small>';
+        showScreen('pw-screen');
+      });
+    }
+
+    function updatePwDots(id, count) {
+      document.getElementById(id).querySelectorAll('.pw-dot').forEach((d, i) => d.classList.toggle('filled', i < count));
+    }
+
+    document.getElementById('pw-keypad').querySelectorAll('.pw-key').forEach(key => {
+      key.addEventListener('click', () => {
+        const k = key.dataset.key;
+        if (k === 'del') pwInput = pwInput.slice(0, -1);
+        else if (pwInput.length < 4) pwInput += k;
+        updatePwDots('pw-dots', pwInput.length);
+        if (pwInput.length === 4) setTimeout(checkPw, 100);
+      });
     });
 
+    function checkPw() {
+      db.ref('passwords/' + selectedName).once('value').then(snap => {
+        const stored = snap.val() || DEFAULT_USER_PW;
+        if (pwInput === stored) {
+          nickname = selectedName; savedPw = pwInput;
+          localStorage.setItem('sarangbu_nickname', nickname);
+          localStorage.setItem('sarangbu_pw', savedPw);
+          showMain();
+        } else {
+          document.getElementById('pw-error').textContent = '비밀번호가 틀렸어요.';
+          pwInput = ''; updatePwDots('pw-dots', 0);
+        }
+      });
+    }
+
+    document.getElementById('pw-back').addEventListener('click', () => showScreen('name-screen'));
+
+    document.getElementById('btn-change-pw').addEventListener('click', () => {
+      pwChangeCurrent = ''; pwChangeStep = 1; pwChangeFirst = '';
+      document.getElementById('pw-change-hint').textContent = '새 비밀번호를 입력해주세요.';
+      document.getElementById('pw-change-error').textContent = '';
+      updatePwDots('pw-change-dots', 0);
+      showScreen('pw-change-screen');
+    });
+
+    document.querySelectorAll('[data-change]').forEach(key => {
+      key.addEventListener('click', () => {
+        const k = key.dataset.change;
+        if (k === 'del') pwChangeCurrent = pwChangeCurrent.slice(0, -1);
+        else if (pwChangeCurrent.length < 4) pwChangeCurrent += k;
+        updatePwDots('pw-change-dots', pwChangeCurrent.length);
+        if (pwChangeCurrent.length === 4) setTimeout(handlePwChange, 100);
+      });
+    });
+
+    function handlePwChange() {
+      if (pwChangeStep === 1) {
+        pwChangeFirst = pwChangeCurrent; pwChangeCurrent = ''; pwChangeStep = 2;
+        document.getElementById('pw-change-hint').textContent = '한 번 더 입력해주세요.';
+        document.getElementById('pw-change-error').textContent = '';
+        updatePwDots('pw-change-dots', 0);
+      } else {
+        if (pwChangeCurrent === pwChangeFirst) {
+          db.ref('passwords/' + nickname).set(pwChangeCurrent).then(() => {
+            savedPw = pwChangeCurrent;
+            localStorage.setItem('sarangbu_pw', savedPw);
+            alert('비밀번호가 변경됐어요!');
+            showMain();
+          });
+        } else {
+          document.getElementById('pw-change-error').textContent = '비밀번호가 일치하지 않아요. 다시 시도해주세요.';
+          pwChangeCurrent = ''; pwChangeStep = 1; pwChangeFirst = '';
+          document.getElementById('pw-change-hint').textContent = '새 비밀번호를 입력해주세요.';
+          updatePwDots('pw-change-dots', 0);
+        }
+      }
+    }
+
+    document.getElementById('pw-change-back').addEventListener('click', showMain);
+
     function showMain() {
-      document.getElementById('name-screen').style.display = 'none';
-      document.getElementById('main-screen').style.display = 'block';
+      showScreen('main');
       document.getElementById('display-name').textContent = nickname;
-      loadMyAccumulated();
-      listenTotal();
-      listenPrayerList();
+      loadMyAccumulated(); listenTotal(); listenPrayerList();
     }
 
     function loadMyAccumulated() {
@@ -373,18 +415,15 @@
         document.getElementById('my-accumulated').textContent = fmt(myAccumulated);
       });
     }
-
     function listenTotal() {
       db.ref('total').on('value', snap => {
         document.getElementById('total-time').textContent = fmt(snap.val() || 0);
       });
     }
-
     function listenPrayerList() {
       db.ref('prayerList').on('value', snap => {
         const text = snap.val() || '';
-        const display = document.getElementById('prayer-display');
-        const empty = document.getElementById('prayer-empty');
+        const display = document.getElementById('prayer-display'), empty = document.getElementById('prayer-empty');
         document.getElementById('prayer-textarea').value = text;
         if (text) { display.textContent = text; display.style.display = 'block'; empty.style.display = 'none'; }
         else { display.style.display = 'none'; empty.style.display = 'block'; }
@@ -403,7 +442,7 @@
       document.getElementById('prayer-textarea').focus();
     });
     document.getElementById('btn-save-list').addEventListener('click', () => {
-      db.ref('prayerList').set(document.getElementById('prayer-textarea').value.trim()).then(() => closeEdit());
+      db.ref('prayerList').set(document.getElementById('prayer-textarea').value.trim()).then(closeEdit);
     });
     document.getElementById('btn-cancel-list').addEventListener('click', closeEdit);
     function closeEdit() {
@@ -422,7 +461,6 @@
         db.ref('sessions/' + nickname).set({ active: true, started: sessionStartTime });
       }, 1000);
     }
-
     function stopPrayer() {
       if (!isRunning) return;
       isRunning = false; clearInterval(sessionInterval); sessionInterval = null;
@@ -442,15 +480,13 @@
 
     document.getElementById('btn-change-name').addEventListener('click', () => {
       if (isRunning) stopPrayer();
-      localStorage.removeItem('sarangbu_nickname');
-      nickname = ''; selectedName = ''; myAccumulated = 0; myCurrentSec = 0;
+      localStorage.removeItem('sarangbu_nickname'); localStorage.removeItem('sarangbu_pw');
+      nickname = ''; savedPw = ''; selectedName = ''; myAccumulated = 0; myCurrentSec = 0;
       document.getElementById('my-accumulated').textContent = fmt(0);
       document.getElementById('my-current').textContent = fmt(0);
-      document.getElementById('main-screen').style.display = 'none';
-      document.getElementById('name-screen').style.display = 'flex';
       document.querySelectorAll('.name-btn').forEach(b => b.classList.remove('selected'));
-      const confirmBtn = document.getElementById('confirm-btn');
-      confirmBtn.disabled = true; confirmBtn.classList.remove('active');
+      const cb = document.getElementById('confirm-btn'); cb.disabled = true; cb.classList.remove('active');
+      showScreen('name-screen');
     });
 
     document.getElementById('btn-reset-toggle').addEventListener('click', () => {
@@ -460,10 +496,7 @@
     });
     document.getElementById('btn-reset-confirm').addEventListener('click', () => {
       const pw = document.getElementById('reset-pw-input').value.trim();
-      if (pw !== RESET_PW) {
-        document.getElementById('reset-error').style.display = 'block';
-        document.getElementById('reset-pw-input').value = ''; return;
-      }
+      if (pw !== ADMIN_PW) { document.getElementById('reset-error').style.display = 'block'; document.getElementById('reset-pw-input').value = ''; return; }
       if (!confirm('전체 기도시간과 모든 누적시간이 초기화됩니다.\n정말 진행할까요?')) return;
       if (isRunning) stopPrayer();
       db.ref('total').set(0); db.ref('users').remove(); db.ref('sessions').remove();
@@ -477,12 +510,16 @@
     });
 
     loadMembers();
-    if (nickname) {
+    if (nickname && savedPw) {
       db.ref('members').once('value').then(snap => {
         const extra = snap.val() ? Object.keys(snap.val()) : [];
         const all = [...new Set([...DEFAULT_MEMBERS, ...extra])];
-        if (all.includes(nickname)) showMain();
-        else localStorage.removeItem('sarangbu_nickname');
+        if (!all.includes(nickname)) { localStorage.removeItem('sarangbu_nickname'); localStorage.removeItem('sarangbu_pw'); return; }
+        db.ref('passwords/' + nickname).once('value').then(snap2 => {
+          const stored = snap2.val() || DEFAULT_USER_PW;
+          if (savedPw === stored) showMain();
+          else { localStorage.removeItem('sarangbu_pw'); selectedName = nickname; goToPwScreen(nickname); }
+        });
       });
     }
   </script>
